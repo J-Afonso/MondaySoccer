@@ -15,7 +15,7 @@
 		
 			if(addPlayer($player_name))
                         {
-                            if(sendEveryoneEmail($_POST['mailTxt'], "<p>O <b>".$player_name."</b> decidiu que o melhor para a sua vida &eacute; jogar &agrave; bola em Massam&aacute; na próxima 2a feira. Caralho, &eacute;s mesmo estúpido.</p>"))
+                            if(sendEveryoneEmail($_POST['mailTxt'], "<p>O <b>".$player_name."</b> decidiu que o melhor para a sua vida &eacute; jogar &agrave; bola em Massam&aacute; na pr&oacute;xima 2a feira. Caralho, &eacute;s mesmo est&uacute;pido.</p>"))
 				header("Location: ../index.php");
                             else
 				echo "Mail error :(";
