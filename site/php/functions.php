@@ -259,6 +259,34 @@ function sendTestEmail($textToAdd, $message)
         return $result;
 }
 
+function retrievePHPMailer($debug){
+    $mail = new PHPMailer();
+    $mail->CharSet = 'UTF-8';
+    $mail->IsSMTP(); // send via SMTP
+
+    if($debug) {
+        //MailHOG config
+        $mail->SMTPAuth   = false;
+	$mail->Host       = "localhost";
+	$mail->Port       = 1025;
+    } else {
+        //GMAIL config
+        $mail->SMTPAuth   = true;                  // enable SMTP authentication
+        $mail->SMTPSecure = "tls";                 // sets the prefix to the server
+        $mail->Host       = "smtp.gmail.com";      // sets GMAIL as the SMTP server
+        $mail->Port       = 587;                   // set the SMTP port for the GMAIL server
+        $mail->Username   = "mondayssoccer";  			// GMAIL username
+        $mail->Password   = "an055apa55";            // GMAIL password
+        //End Gmail
+
+        $mail->From       = "mondayssoccer@gmail.com";
+        $mail->FromName   = "Monday Soccer";
+        $mail->Subject    = getSubject();
+        $mail->SMTPDebug = false;
+    }
+    return $mail;
+}
+
 function sendEveryoneEmail($textToAdd, $message)
 {
 
@@ -275,23 +303,7 @@ function sendEveryoneEmail($textToAdd, $message)
                "<p>Palavra-passe: ConaAtePodre</p>";
 
         $msg = utf8_encode($msg);
-        $mail = new PHPMailer();
-        $mail->CharSet = 'UTF-8';
-        $mail->IsSMTP(); // send via SMTP
-
-        //GMAIL config
-        $mail->SMTPAuth   = true;                  // enable SMTP authentication
-        $mail->SMTPSecure = "tls";                 // sets the prefix to the server
-        $mail->Host       = "smtp.gmail.com";      // sets GMAIL as the SMTP server
-        $mail->Port       = 587;                   // set the SMTP port for the GMAIL server
-        $mail->Username   = "mondayssoccer";  			// GMAIL username
-        $mail->Password   = "an055apa55";            // GMAIL password
-        //End Gmail
-
-        $mail->From       = "mondayssoccer@gmail.com";
-        $mail->FromName   = "Monday Soccer";
-        $mail->Subject    = getSubject();
-        $mail->SMTPDebug = 2;
+        $mail = retrievePHPMailer(false); 
 
         $message_id = getMessageId();
         if($message_id != "")

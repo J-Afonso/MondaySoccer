@@ -59,7 +59,29 @@ vagrantfile:
                     exclude:
                         - .vagrant/
                         - .git/
-                    auto: 'true'            
+                    auto: 'true'
+            vflsf_p2dlf5ej3xza:
+                owner: www-data
+                group: www-data
+                source: ../site
+                target: /var/www
+                sync_type: nfs
+                smb:
+                    smb_host: ''
+                    smb_username: ''
+                    smb_password: ''
+                    mount_options:
+                        dir_mode: '0775'
+                        file_mode: '0664'
+                rsync:
+                    args:
+                        - '--verbose'
+                        - '--archive'
+                        - '-z'
+                    exclude:
+                        - .vagrant/
+                        - .git/
+                    auto: 'true'
         usable_port_range:
             start: 10200
             stop: 10500

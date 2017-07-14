@@ -12,18 +12,20 @@
         $mail->CharSet = 'UTF-8';
 	$mail->IsSMTP(); // send via SMTP 
 	//GMAIL config
-	$mail->SMTPAuth   = true;                  // enable SMTP authentication
-	$mail->SMTPSecure = "ssl";                 // sets the prefix to the server
-	$mail->Host       = "smtp.gmail.com";      // sets GMAIL as the SMTP server
-	$mail->Port       = 465;                   // set the SMTP port for the GMAIL server
-	$mail->Username   = "mondayssoccer";       // GMAIL username
-	$mail->Password   = "an055apa55";          // GMAIL password
+	$mail->SMTPAuth   = false;                  // enable SMTP authentication
+//	$mail->SMTPSecure = "ssl";                 // sets the prefix to the server
+	$mail->Host       = "localhost";      // sets GMAIL as the SMTP server
+	$mail->Port       = 1025;                   // set the SMTP port for the GMAIL server
+	//$mail->Username   = "mondayssoccer";       // GMAIL username
+	//$mail->Password   = "an055apa55";          // GMAIL password
 	//End Gmail
 	
+        $message_id = 10543;
+        
 	$mail->From       = "mondaySoccer@gmail.com"; 
 	$mail->FromName   = "Monday Soccer";
 	$mail->Subject    = "Hello";
-	$mail->SMTPDebug  = 1;   
+	$mail->SMTPDebug  = false;   
 
 		$mail->AddCustomHeader("In-Reply-To:" .$message_id );
 		$mail->AddCustomHeader("References:" .$message_id );
