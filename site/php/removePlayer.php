@@ -17,13 +17,15 @@
 	
 		removePlayer($_GET['id']);		
 	
-		if(sendEveryoneEmail($_POST['mailTxt'], $phrase))
-                {
-                    if(mysql_num_rows($result) < 14) {
-                        echo "E agora, caralho? Vais dar uma foda? Arranjas alguém para o teu lugar? É a tua avó que vai à baliza? Vai-te foder, pá!";
-                    } else {
-                        echo "Estávamos a ver que não desistias, fodasse!Temos pessoal melhor que tu na fila de espera. Põe-te nas putas, ó boi!";
-                    }                        
+                $mailTxt = "";
+                if(isset($_POST['mailTxt'])){
+                    $mailTxt = $_POST['mailTxt'];
+                }
+                
+		if(sendEveryoneEmail($mailTxt, $phrase))
+                {                    
+                    $notEnoughPlayers = mysql_num_rows($result) <= 14 ? 1 : 0;
+                    header("location:../index.php?removeResult=" . $notEnoughPlayers);                       
                 }		
     		else
 			echo "Mail error :(";
