@@ -123,5 +123,15 @@
 			</form>
   <?php } ?>
 	</div>
+  <?php 
+  if(isset($_GET['removeResult'])) {     
+    switch($_GET['removeResult']) { 
+        case 1:
+            echo '<script type="text/javascript">alert("E agora, caralho? Vais dar uma foda? Arranjas alguém para o teu lugar? É a tua avó que vai à baliza? Vai-te foder, pá!");</script>';
+            break;
+        default:
+            echo '<script type="text/javascript">alert("Estávamos a ver que não desistias, fodasse! Temos pessoal melhor que tu na fila de espera. Põe-te nas putas, ó boi!");</script>';
+            break;
+  }}?>           
 	</body>
 </html>

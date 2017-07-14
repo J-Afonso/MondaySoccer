@@ -74,7 +74,7 @@ function removePlayer($player)
 function openFile($filename)
 {
         $file_handle = file_get_contents($filename);
-        return split("\n", $file_handle);
+        return explode("\n", $file_handle);
 }
 
 function getRandomExitPhrase()
@@ -203,60 +203,6 @@ function saveMessageId($messageId)
         $db = new MySQL($dbhost,$dbname,$dbuser,$dbpass);
         $db->query("DELETE FROM message");
         $db->query("INSERT INTO message VALUES('0', '$messageId')");
-}
-
-function sendTestEmail($textToAdd, $message)
-{
-    require("phpmailer/class.phpmailer.php");
-        require("phpmailer/class.smtp.php");
-        require("phpmailer/class.pop3.php");
-
-        $msg = "<p>".$textToAdd."</p>".
-               $message. 
-                buildPlayersList().      
-               "<p>Sign in to <a href=\"http://www.bab-oon.com/mondaysoccer\">Monday Soccer</a> and check in, if you want to play!</p>".
-               "<p>Username: Player</p>".
-               "<p>Password: PessoalDaBola</p>";
-
-        $msg = utf8_encode($msg);
-
-        $mail = new PHPMailer();
-        $mail->CharSet = 'UTF-8';
-        $mail->IsSMTP(); // send via SMTP
-
-        //GMAIL config
-        $mail->SMTPAuth   = true;                  // enable SMTP authentication
-        $mail->SMTPSecure = "ssl";                 // sets the prefix to the server
-        $mail->Host       = "smtp.gmail.com";      // sets GMAIL as the SMTP server
-        $mail->Port       = 465;                   // set the SMTP port for the GMAIL server
-        $mail->Username   = "mondayssoccer";  			// GMAIL username
-        $mail->Password   = "an055apa55";            // GMAIL password
-        //End Gmail
-
-        $mail->SMTPDebug  = 2;
-
-        $mail->From       = "mondaySoccer@gmail.com";
-        $mail->FromName   = "Monday Soccer";
-        $mail->Subject    = getSubject();
-
-        $message_id = "59761c77268c5570fcc36fefb92fa636@www.bab-oon.com";
-        if($message_id != "")
-        {
-                $mail->AddCustomHeader("In-Reply-To:" .$message_id );
-                $mail->AddCustomHeader("References:" .$message_id );
-        }
-        $mail->MsgHTML($msg);
-
-        $mail->AddReplyTo("mondaysoccer@gmail.com","Monday Soccer");//they answer here, optional
-
-        $mail->AddAddress("roimatola@gmail.com", "Jafonso");
-        $mail->IsHTML(true); // send as HTML
-
-        $result = $mail->Send();
-        echo $mail->ReturnedMessageID;  
-        //saveMessageId($mail->ReturnedMessageID);
-
-        return $result;
 }
 
 function retrievePHPMailer($debug){
