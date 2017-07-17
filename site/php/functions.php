@@ -247,9 +247,8 @@ function sendEveryoneEmail($textToAdd, $message)
                "<p>Se esta convocat&oacute;ria te convenceu, <a href=\"http://www.bab-oon.com/mondaysoccer\">junta-te a n&oacute;s</a> e vem conhecer os melhores s&iacute;tios de Massam&aacute;.</p>".
                "<p>Nome do Utilizador: Sida</p>".
                "<p>Palavra-passe: ConaAtePodre</p>";
-
-        $msg = utf8_encode($msg);
-        $mail = retrievePHPMailer(false); 
+        
+        $mail = retrievePHPMailer(true); 
 
         $message_id = getMessageId();
         if($message_id != "")
