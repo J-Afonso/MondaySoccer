@@ -79,12 +79,12 @@
 			?>
 				<form method="post" action="php/addPollResult.php">
 				<fieldset>
-					<legend>Em termos de dias para chacinar um prego?</legend>
+					<legend>Que dia te dá mais jeito rebentar um prego em Massamá?</legend>
 					<ol>
-						<li><input type="radio" name="poll" value="1"/> Terça</li>
-						<li><input type="radio" name="poll" value="2"/> Quarta</li>
-						<li><input type="radio" name="poll" value="3"/> Caralho</li>
-						<li><input type="submit" value="Vota caralho!" /></li>
+						<li><input type="radio" name="poll" value="1"/> 23 de Outubro</li>
+						<li><input type="radio" name="poll" value="2"/> 6 de Novembro</li>
+						<li><input type="radio" name="poll" value="3"/> 13 de Novembro</li>
+						<li><input type="submit" value="Vota, Caralho!" /></li>
 					</ol>
 				</fieldset>
 				</form>

@@ -181,11 +181,11 @@ function convertPollIndex($index)
 {
     switch($index) {
         case 1:
-            return "Terça";
+            return "23 de Outubro";
         case 2:
-            return "Quarta";
+            return "6 de Novembro";
         case 3:
-            return "Caralho";
+            return "13 de Novembro";
     }
 }
 
