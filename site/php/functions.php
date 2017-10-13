@@ -22,187 +22,264 @@ function getPlayersNumber()
 
 function addPlayer($player)
 {
-        include ('../php/config.php');
-        include_once('../php/MySQL.php');	
+    include ('../php/config.php');
+    include_once('../php/MySQL.php');	
 
-        $db = new MySQL($dbhost,$dbname,$dbuser,$dbpass);
+    $db = new MySQL($dbhost,$dbname,$dbuser,$dbpass);
 
-        $results = $db->query("SELECT * FROM players WHERE player='$player'");
-        if(mysql_num_rows($results) > 0)
-            return false;
-        else
-        {
-            $db->query("INSERT INTO players VALUES('0', '$player', NOW())");
-            return true;
-        }
+    $results = $db->query("SELECT * FROM players WHERE player='$player'");
+    if(mysql_num_rows($results) > 0)
+        return false;
+    else
+    {
+        $db->query("INSERT INTO players VALUES('0', '$player', NOW())");
+        return true;
+    }
 }
 
 function removeAllPlayers()
 {
-        include ('config.php');
-        include_once('MySQL.php');	
+    include ('config.php');
+    include_once('MySQL.php');	
 
-        $db = new MySQL($dbhost,$dbname,$dbuser,$dbpass);
+    $db = new MySQL($dbhost,$dbname,$dbuser,$dbpass);
 
-        $db->query("DELETE FROM players");
-        $db->query("DELETE FROM message");
+    $db->query("DELETE FROM players");
+    $db->query("DELETE FROM message");
 }
 
 function getPlayer($player)
 {
-        include ('../php/config.php');
-        include_once('../php/MySQL.php');	
+    include ('../php/config.php');
+    include_once('../php/MySQL.php');	
 
-        $db = new MySQL($dbhost,$dbname,$dbuser,$dbpass);
+    $db = new MySQL($dbhost,$dbname,$dbuser,$dbpass);
 
-        $result = $db->query("SELECT * FROM players WHERE id = '$player'");
+    $result = $db->query("SELECT * FROM players WHERE id = '$player'");
 
-        if($row=mysql_fetch_array($result, MYSQL_ASSOC))
-                return $row['player'];
+    if($row=mysql_fetch_array($result, MYSQL_ASSOC))
+        return $row['player'];
 }
 
 function removePlayer($player)
 {
-        include ('../php/config.php');
-        include_once('../php/MySQL.php');	
+    include ('../php/config.php');
+    include_once('../php/MySQL.php');	
 
-        $db = new MySQL($dbhost,$dbname,$dbuser,$dbpass);
+    $db = new MySQL($dbhost,$dbname,$dbuser,$dbpass);
 
-        $db->query("DELETE FROM players WHERE id = '$player'");
+    $db->query("DELETE FROM players WHERE id = '$player'");
 }
 
 function openFile($filename)
 {
-        $file_handle = file_get_contents($filename);
-        return explode("\n", $file_handle);
+    $file_handle = file_get_contents($filename);
+    return explode("\n", $file_handle);
 }
 
 function getRandomExitPhrase()
 {
-        $phrases = openFile("exitPhrases.txt");
-        return $phrases[array_rand($phrases)];
-
+    $phrases = openFile("exitPhrases.txt");
+    return $phrases[array_rand($phrases)];
 }
 
 function saveSubject($subject)
 {
-        include ('config.php');
-        include_once('MySQL.php');	
+    include ('config.php');
+    include_once('MySQL.php');	
 
-        $db = new MySQL($dbhost,$dbname,$dbuser,$dbpass);
-        $db->query("DELETE FROM subject");
-        $db->query("INSERT INTO subject VALUES('0', '$subject')");
-
+    $db = new MySQL($dbhost,$dbname,$dbuser,$dbpass);
+    $db->query("DELETE FROM subject");
+    $db->query("INSERT INTO subject VALUES('0', '$subject')");
 }
 
 
 function getSubject()
 {
-        include ('config.php');
-        include_once('MySQL.php');	
+    include ('config.php');
+    include_once('MySQL.php');	
 
-        $db = new MySQL($dbhost,$dbname,$dbuser,$dbpass);
-        $result = $db->query("SELECT * FROM subject");
-        if($row=mysql_fetch_array($result, MYSQL_ASSOC))
-                return $row['subject'];
-        else
-                return "FUTEBOL SEGUNDA FEIRA";
+    $db = new MySQL($dbhost,$dbname,$dbuser,$dbpass);
+    $result = $db->query("SELECT * FROM subject");
+    if($row=mysql_fetch_array($result, MYSQL_ASSOC))
+        return $row['subject'];
+    else
+        return "FUTEBOL SEGUNDA FEIRA";
 }
 
 function getPlayersForEmail()
 {
+    include ('config.php');
+    include_once('MySQL.php');	
 
-        include ('config.php');
-        include_once('MySQL.php');	
-
-        $db = new MySQL($dbhost,$dbname,$dbuser,$dbpass);
-        return $db->query("SELECT * from players ORDER BY TIMESTAMP ASC ");
+    $db = new MySQL($dbhost,$dbname,$dbuser,$dbpass);
+    return $db->query("SELECT * from players ORDER BY TIMESTAMP ASC ");
 }
 
 function getMails()
 {
-        include ('config.php');
-        include_once('MySQL.php');	
+    include ('config.php');
+    include_once('MySQL.php');	
 
-        $db = new MySQL($dbhost,$dbname,$dbuser,$dbpass);
+    $db = new MySQL($dbhost,$dbname,$dbuser,$dbpass);
 
-        return $db->query("SELECT * from emails");
+    return $db->query("SELECT * from emails");
+}
+
+function getUserIp(){
+    if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+        $ip = $_SERVER['HTTP_CLIENT_IP'];
+    } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+        $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+    } else {
+        $ip = $_SERVER['REMOTE_ADDR'];
+    }
+    return $ip;
+}
+
+function userAlreadyVoted()
+{
+    include ('php/config.php');
+    include_once('php/MySQL.php');   
+
+    $ip = getUserIp();
+    $db = new MySQL($dbhost,$dbname,$dbuser,$dbpass);
+
+    $results = $db->query("SELECT * FROM poll WHERE ip='$ip'");
+    return mysql_num_rows($results) > 0;
+}
+
+function addPollResult($poll)
+{
+    include ('../php/config.php');
+    include_once('../php/MySQL.php');   
+
+    $db = new MySQL($dbhost,$dbname,$dbuser,$dbpass);
+
+    $ip = getUserIp();
+    $results = $db->query("SELECT * FROM poll WHERE ip='$ip'");
+    if(mysql_num_rows($results) > 0) {
+        return false;
+    }
+    else{
+        $db->query("INSERT INTO poll VALUES('0', '$ip', $poll)");
+        return true;
+    }
+}
+
+function getPollResults()
+{
+    include ('php/config.php');
+    include_once('php/MySQL.php');   
+
+    $db = new MySQL($dbhost,$dbname,$dbuser,$dbpass);
+
+    return $db->query("SELECT poll, COUNT(id) as results FROM baboon_mondaysoccer.poll GROUP BY poll ORDER BY results DESC");
+}
+
+function convertPollIndex($index) 
+{
+    switch($index) {
+        case 1:
+            return "Terça";
+        case 2:
+            return "Quarta";
+        case 3:
+            return "Caralho";
+    }
+}
+
+function printPollResults() 
+{
+    $poll_results = getPollResults();
+    ?>
+    <fieldset>
+        <legend>Resultados da votação</legend>
+        <ol>
+    <?php
+        while($row=mysql_fetch_array($poll_results, MYSQL_ASSOC)) {
+            echo "<li>" . convertPollIndex($row['poll']) . "&nbsp:&nbsp" . $row['results'] . "</li>";
+        }
+    ?>
+        </ol>
+    </fieldset>
+    <?php
 }
 
 function isLoggedIn()
 {
-        $result = false;
+    $result = false;
 
-        if(isset($_SESSION['user_logged']) && $_SESSION['user_logged'])
-        {
-                $result = true;
-        }	
-        else if(isset($_COOKIE["MondaySoccerId"]))
-        {	
-                $_SESSION['user_logged']  = true;
-                $_SESSION['id']           = $_COOKIE["MondaySoccerId"];
-                $_SESSION['name']    	  = $_COOKIE["MondaySoccerName"];
-                $_SESSION['profile']      = $_COOKIE["MondaySoccerProfile"];
+    if(isset($_SESSION['user_logged']) && $_SESSION['user_logged'])
+    {
+            $result = true;
+    }	
+    else if(isset($_COOKIE["MondaySoccerId"]))
+    {	
+            $_SESSION['user_logged']  = true;
+            $_SESSION['id']           = $_COOKIE["MondaySoccerId"];
+            $_SESSION['name']    	  = $_COOKIE["MondaySoccerName"];
+            $_SESSION['profile']      = $_COOKIE["MondaySoccerProfile"];
 
-                $result = true;
-        }	
+            $result = true;
+    }	
 
-        return $result;
+    return $result;
 }
 
 function buildPlayersList()
 {
-        $msg = "<h1>&Eacute; s&oacute; gente horr&iacute;vel nesta convocat&oacute;ria.</h1><fieldset title=\"Players\"><legend>Os que v&atilde;o!</legend><ol>";
+    $msg = "<h1>&Eacute; s&oacute; gente horr&iacute;vel nesta convocat&oacute;ria.</h1><fieldset title=\"Players\"><legend>Os que v&atilde;o!</legend><ol>";
 
-        $result = getPlayersForEmail();
-        $counter = 0;
-        $breaked = false;
+    $result = getPlayersForEmail();
+    $counter = 0;
+    $breaked = false;
+    while($row=mysql_fetch_array($result, MYSQL_ASSOC))
+    {
+        $msg = $msg."<li>".$row['player']."</li>";        
+        $counter++;       
+        if($counter > 13)
+        {
+            $breaked = true;
+            break;
+        }
+    }
+
+    if($breaked)
+    {
+        $msg = $msg."</ol></fieldset><fieldset title=\"Substitutes\"><legend>Os que queriam ir, mas n&atilde;o v&atilde;o.</legend><ol>";
         while($row=mysql_fetch_array($result, MYSQL_ASSOC))
         {
-            $msg = $msg."<li>".$row['player']."</li>";        
-            $counter++;       
-            if($counter > 13)
-            {
-                $breaked = true;
-                break;
-            }
+            $msg = $msg."<li>".$row['player']."</li>";                
         }
+    }
 
-        if($breaked)
-        {
-            $msg = $msg."</ol></fieldset><fieldset title=\"Substitutes\"><legend>Os que queriam ir, mas n&atilde;o v&atilde;o.</legend><ol>";
-            while($row=mysql_fetch_array($result, MYSQL_ASSOC))
-            {
-                $msg = $msg."<li>".$row['player']."</li>";                
-            }
-        }
+    $msg = $msg."</ol></fieldset>";
 
-        $msg = $msg."</ol></fieldset>";
-
-        return $msg;
+    return $msg;
 }
 
 function getMessageId()
 {
-        include ('config.php');
-        include_once('MySQL.php');	
+    include ('config.php');
+    include_once('MySQL.php');	
 
-        $db = new MySQL($dbhost,$dbname,$dbuser,$dbpass);
-        $result = $db->query("SELECT * FROM message");
-        if($row=mysql_fetch_array($result, MYSQL_ASSOC))
-                return $row['messageId'];
-        else
-                return "";
+    $db = new MySQL($dbhost,$dbname,$dbuser,$dbpass);
+    $result = $db->query("SELECT * FROM message");
+    if($row=mysql_fetch_array($result, MYSQL_ASSOC))
+        return $row['messageId'];
+    else
+        return "";
 }
 
 function saveMessageId($messageId)
 {
-        include ('config.php');
-        include_once('MySQL.php');	
+    include ('config.php');
+    include_once('MySQL.php');	
 
-        $db = new MySQL($dbhost,$dbname,$dbuser,$dbpass);
-        $db->query("DELETE FROM message");
-        $db->query("INSERT INTO message VALUES('0', '$messageId')");
+    $db = new MySQL($dbhost,$dbname,$dbuser,$dbpass);
+    $db->query("DELETE FROM message");
+    $db->query("INSERT INTO message VALUES('0', '$messageId')");
 }
 
 function retrievePHPMailer($debug){
@@ -213,8 +290,8 @@ function retrievePHPMailer($debug){
     if($debug) {
         //MailHOG config
         $mail->SMTPAuth   = false;
-	$mail->Host       = "localhost";
-	$mail->Port       = 1025;
+    	$mail->Host       = "localhost";
+    	$mail->Port       = 1025;
     } else {
         //GMAIL config
         $mail->SMTPAuth   = true;                  // enable SMTP authentication
