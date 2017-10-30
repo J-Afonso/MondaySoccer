@@ -25,12 +25,12 @@
 						while($row=mysql_fetch_array($result, MYSQL_ASSOC))
 						{
 							echo "<li>".$row['player']." &nbsp; <a href=\"php/removePlayer.php?id=".$row['id']."\">remove</a></li>";
-                            $counter++;
-                            if($counter > 13)
-                            {
-                                $breaked = true;
-                                break;
-                            }
+                                                        $counter++;
+                                                        if($counter > 13)
+                                                        {
+                                                            $breaked = true;
+                                                            break;
+                                                        }
 						}
 					}
 					else
@@ -38,12 +38,12 @@
 						while($row=mysql_fetch_array($result, MYSQL_ASSOC))
 						{
 							echo "<li>".$row['player']."</li>";
-                            $counter++;
-                            if($counter > 13)
-                            {
-                                $breaked = true;
-                                break;
-                            }
+                                                        $counter++;
+                                                        if($counter > 13)
+                                                        {
+                                                            $breaked = true;
+                                                            break;
+                                                        }
 						}
 
 					}
@@ -73,23 +73,7 @@
 		<?php
 		if(isLoggedIn())
 		{
-			if(userAlreadyVoted()) {
-				printPollResults();
-			} else {	
-			?>
-				<form method="post" action="php/addPollResult.php">
-				<fieldset>
-					<legend>Que dia te dá mais jeito rebentar um prego em Massamá?</legend>
-					<ol>
-						<li><input type="radio" name="poll" value="1"/> 23 de Outubro</li>
-						<li><input type="radio" name="poll" value="2"/> 6 de Novembro</li>
-						<li><input type="radio" name="poll" value="3"/> 13 de Novembro</li>
-						<li><input type="submit" value="Vota, Caralho!" /></li>
-					</ol>
-				</fieldset>
-				</form>
-			<?php 
-			}  ?>
+		?>
 				<form method="post" action="php/addPlayer.php">
 				<fieldset>
 					<legend>Vais jogar?</legend>
@@ -102,21 +86,21 @@
 					</ol>
 				</fieldset>
 				</form>
-			<?php 
+				<?php
 				if($_SESSION['profile'] == 'admin')
 				{
 				?>
-                    <form method="post" action="php/newEvent.php">
-                        <fieldset>
-                            <legend>New Event?</legend>
-                            <ol>
-                                <li><label>O Amigo vai jogar um joguinho novo?</label></li>
-                                <li><label>Coloca aqui o subject do email (opcional)</label></li>						
-                                <li><input name="subject" type="text" /></li>
-                                <li><input type="submit" value="Vou, vou" /></li>
-                            </ol>
-                        </fieldset>
-                    </form>                                    
+                                    <form method="post" action="php/newEvent.php">
+                                        <fieldset>
+                                                <legend>New Event?</legend>
+                                                <ol>
+                                                        <li><label>O Amigo vai jogar um joguinho novo?</label></li>
+                                                        <li><label>Coloca aqui o subject do email (opcional)</label></li>						
+                                                        <li><input name="subject" type="text" /></li>
+                                                        <li><input type="submit" value="Vou, vou" /></li>
+                                                </ol>
+                                        </fieldset>
+                                    </form>                                    
 				<?php
 				} ?>
 				Logged in as <u><?php echo $_SESSION['name'] ?></u><br/> <a href="php/logout.php">Logout</a>
