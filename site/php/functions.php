@@ -246,7 +246,9 @@ function sendEveryoneEmail($textToAdd, $message)
                "<p><a href=\"http://www.bab-oon.com/mondaysoccer/static/newerScores.html\">Tabela classificativa.</a>.</p>".
                "<p>Se esta convocat&oacute;ria te convenceu, <a href=\"http://www.bab-oon.com/mondaysoccer\">junta-te a n&oacute;s</a> e vem conhecer os melhores s&iacute;tios de Massam&aacute;.</p>".
                "<p>Nome do Utilizador: Sida</p>".
-               "<p>Palavra-passe: ConaAtePodre</p>";
+               "<p>Palavra-passe: ConaAtePodre</p>".
+               "<p>Horas: 21h</p>".
+               "<p>Local: <a href=\"https://goo.gl/maps/J8hERitxMRD2\">Escola Miguel Torga.</a>.</p>";
         
         $mail = retrievePHPMailer(false); 
 
