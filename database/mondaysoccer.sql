@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 26, 2019 at 06:19 PM
+-- Generation Time: Aug 26, 2019 at 06:36 PM
 -- Server version: 5.6.45
 -- PHP Version: 7.2.7
 
@@ -87,6 +87,19 @@ INSERT INTO `emails` (`id`, `email`, `display`) VALUES
 (94, 'Luisfffrois1984@gmail.com', 'Luís frois'),
 (95, 'fmquendera@gmail.com', 'Quendera'),
 (96, 'david.francisco@yahoo.fr', 'David Francisco');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `logs`
+--
+
+CREATE TABLE `logs` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `action` varchar(255) NOT NULL,
+  `date` date NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -189,6 +202,12 @@ ALTER TABLE `emails`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `logs`
+--
+ALTER TABLE `logs`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `message`
 --
 ALTER TABLE `message`
@@ -221,6 +240,12 @@ ALTER TABLE `users`
 --
 ALTER TABLE `emails`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
+
+--
+-- AUTO_INCREMENT for table `logs`
+--
+ALTER TABLE `logs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `message`

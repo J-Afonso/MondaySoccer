@@ -33,8 +33,20 @@ function addPlayer($player)
         else
         {
             $db->query("INSERT INTO players VALUES('0', '$player', NOW())");
+            logAction("addPlayer " . $player);
             return true;
         }
+}
+
+function logAction($action) 
+{
+    include ('../php/config.php');
+    include_once('../php/MySQL.php');   
+
+    $id = $_SESSION['id'];
+
+    $db = new MySQL($dbhost,$dbname,$dbuser,$dbpass);
+    $db->query("INSERT INTO logs VALUES('0', '$id', $action', NOW())");
 }
 
 function removeAllPlayers()
@@ -46,6 +58,8 @@ function removeAllPlayers()
 
         $db->query("DELETE FROM players");
         $db->query("DELETE FROM message");
+
+        logAction("removeAllPlayers");
 }
 
 function getPlayer($player)
@@ -69,6 +83,8 @@ function removePlayer($player)
         $db = new MySQL($dbhost,$dbname,$dbuser,$dbpass);
 
         $db->query("DELETE FROM players WHERE id = '$player'");
+
+        logAction("removePlayer " . $player);
 }
 
 function openFile($filename)
