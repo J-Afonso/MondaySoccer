@@ -46,7 +46,7 @@ function logAction($action)
     $id = $_SESSION['id'];
 
     $db = new MySQL($dbhost,$dbname,$dbuser,$dbpass);
-    $db->query("INSERT INTO logs VALUES('0', '$id', $action', NOW())");
+    $db->query("INSERT INTO logs VALUES('0', '$id', '$action', NOW())");
 }
 
 function removeAllPlayers()
