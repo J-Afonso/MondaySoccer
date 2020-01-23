@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.6
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 24, 2017 at 05:24 PM
--- Server version: 5.6.35
--- PHP Version: 5.6.30
+-- Generation Time: Aug 26, 2019 at 06:36 PM
+-- Server version: 5.6.45
+-- PHP Version: 7.2.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -30,7 +32,7 @@ CREATE TABLE `emails` (
   `id` int(10) UNSIGNED NOT NULL,
   `email` varchar(45) NOT NULL,
   `display` varchar(45) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `emails`
@@ -38,7 +40,66 @@ CREATE TABLE `emails` (
 
 INSERT INTO `emails` (`id`, `email`, `display`) VALUES
 (1, 'roimatola@gmail.com', 'Joao Afonso'),
-(2, 'joao.afonso@bab-oon.com', '');
+(7, 'fredericobggoncalves@gmail.com', ' '),
+(99, 'francisco.freire@montepio.pt', ''),
+(42, 'angelomdelgado@gmail.com', ''),
+(11, 'djpolivveira@gmail.com', ' '),
+(12, ' jaleal@gmail.com', ' '),
+(13, 'hugo_tavares81@hotmail.com', ' '),
+(15, ' tiagofmo@sapo.pt', ' '),
+(16, 'bruno_jarbas@hotmail.com', ' '),
+(17, ' telmo.agostinho@gmail.com', ' '),
+(18, 'bbggoncalves@gmail.com', ' '),
+(19, 'hugocosta.mail@gmail.com', ' '),
+(21, ' jonga31988@yahoo.com', ' '),
+(22, 'helder_frn@hotmail.com', ' '),
+(23, ' rncsousa@gmail.com', ' '),
+(24, ' miguelcardosobmw@hotmail.com', ' '),
+(93, 'pjsena76@hotmail.com', 'Paulo Sena'),
+(91, 'hvarandas@gmail.com', ''),
+(31, 'dcarnide@gmail.com', ' '),
+(34, 'esotericaarte@mail.telepac.pt', ' '),
+(73, 'snoopdoggy@gmail.com', 'Fernando'),
+(38, ' PGCunha@montepio.pt', ' '),
+(71, 'rjlima.88@gmail.com', 'Ricardo Lima'),
+(97, 'AJFernandes@montepio.pt', ''),
+(78, 'bruno.marques88@gmail.com', ''),
+(47, 'bruno.m.b.simoes@gmail.com', 'bruno simoes'),
+(2, 'hugo_msg@hotmail.com', 'Hugo'),
+(49, 'antonioarcosta@gmail.com', 'António Costa'),
+(52, 'tiagormorais@yahoo.com', 'Tiago Morais'),
+(66, 'joaombtsantos@gmail.com', ''),
+(98, 'dasajo@gmail.com', ''),
+(56, 'bmsribeiro@hotmail.com', 'Ribeiro'),
+(60, 'bruno.pinho@colegiodestomas.com', 'Bruno Pinho'),
+(77, ' pmalmeida@montepio.pt', 'Paulo Almeida'),
+(79, 'luis.amaral@coriant.com', 'Luis Amaral'),
+(76, 'bruno_candeias_5_@hotmail.com', 'Bruno Candeias'),
+(75, 'pedrosercio@gmail.com', 'Pedrito'),
+(64, 'pinheiro.helder13@gmail.com', 'Helder'),
+(65, 'oscarleal.network@gmail.com', 'Oscar'),
+(85, 'Gmalcata@hotmail.com', ''),
+(86, 'valentino_ag2@hotmail.com', ''),
+(87, 'jcunharainho@gmail.com', ''),
+(88, 'lasilva@montepio.pt', ''),
+(89, 'Cportalegre2@hotmail.com', 'Carlos Martins'),
+(92, 'Filipe.barata@gmail.com', 'Filipe Barata'),
+(94, 'Luisfffrois1984@gmail.com', 'Luís frois'),
+(95, 'fmquendera@gmail.com', 'Quendera'),
+(96, 'david.francisco@yahoo.fr', 'David Francisco');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `logs`
+--
+
+CREATE TABLE `logs` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `action` varchar(255) NOT NULL,
+  `date` date NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -49,32 +110,14 @@ INSERT INTO `emails` (`id`, `email`, `display`) VALUES
 CREATE TABLE `message` (
   `id` int(10) UNSIGNED NOT NULL,
   `messageId` varchar(45) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `message`
 --
 
 INSERT INTO `message` (`id`, `messageId`) VALUES
-(863, '<f91dde5851da43252163fdd378cb19f5@www.bab-oon');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `message_thursday`
---
-
-CREATE TABLE `message_thursday` (
-  `id` int(255) NOT NULL,
-  `messageId` varchar(255) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `message_thursday`
---
-
-INSERT INTO `message_thursday` (`id`, `messageId`) VALUES
-(12, '<3fd1b0589f7fa92864cd1cb9b5504787@www.bab-oon.com>\n');
+(975, '<1ab8e7ee09078829c29192e0e736b5f8@www.bab-oon');
 
 -- --------------------------------------------------------
 
@@ -86,49 +129,27 @@ CREATE TABLE `players` (
   `id` int(10) UNSIGNED NOT NULL,
   `player` varchar(45) NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `players`
 --
 
 INSERT INTO `players` (`id`, `player`, `timestamp`) VALUES
-(4652, 'Ângelo', '2017-06-21 14:19:44'),
-(4653, 'Bernardo', '2017-06-21 14:21:29'),
-(4654, 'Pedro Cunha', '2017-06-21 14:32:22'),
-(4655, 'FRED', '2017-06-21 14:36:00'),
-(4656, 'ricardi silva', '2017-06-21 14:46:14'),
-(4657, 'Morais', '2017-06-21 15:12:08'),
-(4658, 'Carnide ', '2017-06-21 15:13:26'),
-(4659, 'Tavares', '2017-06-21 15:32:22'),
-(4660, 'Jorge K', '2017-06-21 18:18:20'),
-(4661, 'Luis Silva', '2017-06-22 08:42:04'),
-(4662, 'Pé de Atleta', '2017-06-22 14:32:39'),
-(4663, 'Mike ', '2017-06-22 19:47:15'),
-(4664, 'Hugo Costa', '2017-06-23 16:41:38'),
-(4665, 'João Tiago', '2017-06-23 17:23:50');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `players_thursday`
---
-
-CREATE TABLE `players_thursday` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `player` varchar(255) NOT NULL,
-  `timestamp` int(255) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `players_thursday`
---
-
-INSERT INTO `players_thursday` (`id`, `player`, `timestamp`) VALUES
-(76, 'Ricardo Sousa', 2014),
-(77, 'Bernardo', 2014),
-(79, 'Miguel', 2014),
-(80, 'Tavares', 2014);
+(6405, 'The Telmo', '2019-08-22 13:01:15'),
+(6406, 'Bernardo', '2019-08-22 13:03:37'),
+(6420, 'JoÃ£o Pinto ', '2019-08-26 14:20:04'),
+(6408, 'Carnydhe', '2019-08-22 13:08:12'),
+(6409, 'Pedro Cunha', '2019-08-22 13:26:14'),
+(6410, 'Sena', '2019-08-22 13:29:45'),
+(6411, 'Mike', '2019-08-22 13:30:42'),
+(6421, 'Paulo Almeida', '2019-08-26 15:41:43'),
+(6414, 'Helder Marega Pinheiro', '2019-08-22 18:06:27'),
+(6415, 'Tiago', '2019-08-22 18:44:05'),
+(6416, 'Francisco Freire', '2019-08-23 07:37:57'),
+(6417, 'Daniel Jorge', '2019-08-23 08:01:48'),
+(6418, 'Henrique', '2019-08-25 00:46:45'),
+(6419, 'JoÃ£o Afonso', '2019-08-25 22:37:01');
 
 -- --------------------------------------------------------
 
@@ -139,32 +160,14 @@ INSERT INTO `players_thursday` (`id`, `player`, `timestamp`) VALUES
 CREATE TABLE `subject` (
   `id` int(11) NOT NULL,
   `subject` varchar(150) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `subject`
 --
 
 INSERT INTO `subject` (`id`, `subject`) VALUES
-(319, 'Convocatoria para Monday 26th of June 2017');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `subject_thursday`
---
-
-CREATE TABLE `subject_thursday` (
-  `id` int(11) NOT NULL,
-  `subject` varchar(300) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `subject_thursday`
---
-
-INSERT INTO `subject_thursday` (`id`, `subject`) VALUES
-(21, 'Convocatoria para Thursday 16th of October 2014');
+(432, 'Convocatoria 26 de Agosto');
 
 -- --------------------------------------------------------
 
@@ -177,7 +180,7 @@ CREATE TABLE `users` (
   `name` varchar(45) NOT NULL,
   `password` varchar(45) NOT NULL,
   `profile` varchar(45) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users`
@@ -185,7 +188,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `password`, `profile`) VALUES
 (16, 'player', '82e768192f01e1585d44b6af02d6b4a4', 'user'),
-(17, 'admin', 'de920bd0e514da8a83342e38ed92bb8e', 'admin');
+(17, 'admin', 'de920bd0e514da8a83342e38ed92bb8e', 'admin'),
+(19, 'sida', 'ea9fea22f600db72fce3be3111b6b310', 'user');
 
 --
 -- Indexes for dumped tables
@@ -198,15 +202,15 @@ ALTER TABLE `emails`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `message`
+-- Indexes for table `logs`
 --
-ALTER TABLE `message`
+ALTER TABLE `logs`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `message_thursday`
+-- Indexes for table `message`
 --
-ALTER TABLE `message_thursday`
+ALTER TABLE `message`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -216,21 +220,9 @@ ALTER TABLE `players`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `players_thursday`
---
-ALTER TABLE `players_thursday`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `subject`
 --
 ALTER TABLE `subject`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `subject_thursday`
---
-ALTER TABLE `subject_thursday`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -247,42 +239,39 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `emails`
 --
 ALTER TABLE `emails`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
+
+--
+-- AUTO_INCREMENT for table `logs`
+--
+ALTER TABLE `logs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `message`
 --
 ALTER TABLE `message`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=864;
---
--- AUTO_INCREMENT for table `message_thursday`
---
-ALTER TABLE `message_thursday`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=976;
+
 --
 -- AUTO_INCREMENT for table `players`
 --
 ALTER TABLE `players`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4666;
---
--- AUTO_INCREMENT for table `players_thursday`
---
-ALTER TABLE `players_thursday`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6422;
+
 --
 -- AUTO_INCREMENT for table `subject`
 --
 ALTER TABLE `subject`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=320;
---
--- AUTO_INCREMENT for table `subject_thursday`
---
-ALTER TABLE `subject_thursday`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=433;
+
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
