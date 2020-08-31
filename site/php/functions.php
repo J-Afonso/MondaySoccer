@@ -264,7 +264,7 @@ function sendEveryoneEmail($textToAdd, $message)
                "<p>Nome do Utilizador: Sida</p>".
                "<p>Palavra-passe: ConaAtePodre</p>".
                "<p>Horas: 21h</p>".
-               "<p>Local: <a href=\"https://goo.gl/maps/qeuh74UriTJ5yNk37\">Escola EB23 Carlos Paredes.</a>.</p>";
+               "<p>Local: <a href=\"https://goo.gl/maps/WVRoLoi3YoqTSNW26\">Escola Rainha Dona Amelia.</a>.</p>";
         
         $mail = retrievePHPMailer(false); 
 
