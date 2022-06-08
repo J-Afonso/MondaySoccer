@@ -237,8 +237,8 @@ function retrievePHPMailer($debug){
         $mail->SMTPSecure = "tls";                 // sets the prefix to the server
         $mail->Host       = "smtp.gmail.com";      // sets GMAIL as the SMTP server
         $mail->Port       = 587;                   // set the SMTP port for the GMAIL server
-        $mail->Username   = "mondayssoccer";  			// GMAIL username
-        $mail->Password   = "an055apa55";            // GMAIL password
+        $mail->Username   = "mondayssoccer";  	   // GMAIL username
+        $mail->Password   = "ftru aupw qldl ixjo"; // GMAIL password
         //End Gmail
 
         $mail->From       = "mondayssoccer@gmail.com";
