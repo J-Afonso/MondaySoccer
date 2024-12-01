@@ -313,7 +313,7 @@ GEM
       websocket (~> 1.0)
     rainbow (2.2.2)
       rake
-    rake (10.4.2)
+    rake (12.3.3)
     rb-fsevent (0.9.6)
     rb-inotify (0.9.5)
       ffi (>= 1.9.24)
