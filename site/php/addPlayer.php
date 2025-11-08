@@ -7,15 +7,20 @@
 	{
 		
 		$player_name = stripslashes($_POST['player']);
+		$positions = isset($_POST['positions']) ? $_POST['positions'] : [];
 	
 		if($player_name == "")
 			echo "Invalid username";
+		elseif(empty($positions))
+			echo "Tens de escolher pelo menos uma posição, caralho!";
 		else
 		{
+			$positions_str = implode(", ", $positions);
+			$player_with_positions = $player_name . " (" . $positions_str . ")";
 		
-			if(addPlayer($player_name))
+			if(addPlayer($player_with_positions))
                         {
-                            if(sendEveryoneEmail($_POST['mailTxt'], "<p>O <b>".$player_name."</b> decidiu que o melhor para a sua vida &eacute; jogar &agrave; bola em Alcantara na pr&oacute;xima 2a feira. Caralho, &eacute;s mesmo est&uacute;pido.</p>"))
+                            if(sendEveryoneEmail($_POST['mailTxt'], "<p>O <b>".$player_with_positions."</b> decidiu que o melhor para a sua vida &eacute; jogar &agrave; bola em Alcantara na pr&oacute;xima 2a feira. Caralho, &eacute;s mesmo est&uacute;pido.</p>"))
 				header("Location: ../index.php");
                             else
 				echo "Mail error :(";

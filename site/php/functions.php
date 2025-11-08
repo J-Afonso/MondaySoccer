@@ -256,8 +256,8 @@ function sendEveryoneEmail($textToAdd, $message)
         require("phpmailer/class.smtp.php");
         require("phpmailer/class.pop3.php");
 
-        $msg = "<p>".$textToAdd."</p>".
-               $message. 
+        $msg = "<p>".$message."</p>".
+               "<p>".$textToAdd."</p>".
                 buildPlayersList().    
                "<p><a href=\"http://www.bab-oon.com/mondaysoccer/static/newerScores.html\">Tabela classificativa.</a>.</p>".
                "<p>Se esta convocat&oacute;ria te convenceu, <a href=\"http://www.bab-oon.com/mondaysoccer\">junta-te a n&oacute;s</a> e vem conhecer os melhores s&iacute;tios de Massam&aacute;.</p>".
