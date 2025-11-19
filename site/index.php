@@ -80,32 +80,35 @@
 					<ol>
 						<li><label>O meu nome pr&oacute;prio:</label></li>
 						<li><input name="player" type="text" /></li>
-						<li><label>Posições que jogas:</label></li>
 						<li>
-                        	<input type="checkbox" name="positions[]" value="GK" id="pos-gk" style="display: inline;" />
-                        	<label for="pos-gk" style="display: inline;">GK</label>
-                        	&nbsp;&nbsp;
-                        	<input type="checkbox" name="positions[]" value="DC" id="pos-dc" style="display: inline;" />
-                        	<label for="pos-dc" style="display: inline;">DC</label>
-                        	&nbsp;&nbsp;
-                        	<input type="checkbox" name="positions[]" value="DLE" id="pos-dle" style="display: inline;" />
-                        	<label for="pos-dle" style="display: inline;">DLE</label>
-                        	<br />
-                        	<input type="checkbox" name="positions[]" value="DLD" id="pos-dld" style="display: inline;" />
-                        	<label for="pos-dld" style="display: inline;">DLD</label>
-                        	&nbsp;&nbsp;
-                        	<input type="checkbox" name="positions[]" value="MC" id="pos-mc" style="display: inline;" />
-                        	<label for="pos-mc" style="display: inline;">MC</label>
-                        	&nbsp;&nbsp;
-                        	<input type="checkbox" name="positions[]" value="AV" id="pos-av" style="display: inline;" />
-                        	<label for="pos-av" style="display: inline;">AV</label>
-                        </li>
+            				<input type="checkbox" name="add_position" id="add-position" onclick="togglePosition()" style="display: inline;" />
+            				<label for="add-position" style="display: inline;">Quero adicionar a minha posição</label>
+        			    </li>
+            			<li>
+            				<label for="position">Posição:</label>
+            				<select name="position" id="position" disabled>
+            					<option value="">Seleciona uma posição</option>
+            					<option value="Defesa">Defesa</option>
+            					<option value="Médio">Médio</option>
+            					<option value="Avançado">Avançado</option>
+            				</select>
+            			</li>
 						<li><label>Escreve alguma javardeira (opcional)</label></li>
 						<li><textarea name="mailTxt" rows="4" cols="20"></textarea></li>
 						<li><input type="submit" value="Adoro o bigode do gajo careca!" /></li>
 					</ol>
 				</fieldset>
 				</form>
+				<script type="text/javascript">
+                function togglePosition() {
+                	var checkbox = document.getElementById('add-position');
+                	var select = document.getElementById('position');
+                	select.disabled = !checkbox.checked;
+                	if (!checkbox.checked) {
+                		select.value = '';
+                	}
+                }
+                </script>
 				<?php
 				if($_SESSION['profile'] == 'admin')
 				{
