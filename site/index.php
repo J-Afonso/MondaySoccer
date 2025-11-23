@@ -80,12 +80,35 @@
 					<ol>
 						<li><label>O meu nome pr&oacute;prio:</label></li>
 						<li><input name="player" type="text" /></li>
+						<li>
+            				<input type="checkbox" name="add_position" id="add-position" onclick="togglePosition()" style="display: inline;" />
+            				<label for="add-position" style="display: inline;">Quero adicionar a minha posição</label>
+        			    </li>
+            			<li>
+            				<label for="position">Posição:</label>
+            				<select name="position" id="position" disabled>
+            					<option value="">Seleciona uma posição</option>
+            					<option value="Defesa">Defesa</option>
+            					<option value="Médio">Médio</option>
+            					<option value="Avançado">Avançado</option>
+            				</select>
+            			</li>
 						<li><label>Escreve alguma javardeira (opcional)</label></li>
 						<li><textarea name="mailTxt" rows="4" cols="20"></textarea></li>
 						<li><input type="submit" value="Adoro o bigode do gajo careca!" /></li>
 					</ol>
 				</fieldset>
 				</form>
+				<script type="text/javascript">
+                function togglePosition() {
+                	var checkbox = document.getElementById('add-position');
+                	var select = document.getElementById('position');
+                	select.disabled = !checkbox.checked;
+                	if (!checkbox.checked) {
+                		select.value = '';
+                	}
+                }
+                </script>
 				<?php
 				if($_SESSION['profile'] == 'admin')
 				{
